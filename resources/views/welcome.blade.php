@@ -188,3 +188,12 @@
         @endpush
 
 @endsection
+
+@if($errors->any())
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('add-task-modal');
+            if (modal) modal.setAttribute('aria-hidden','false');
+        });
+    </script>
+@endif
