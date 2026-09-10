@@ -7,8 +7,10 @@
             <button type="button" class="btn btn-ghost" aria-label="Close">✕</button>
         </div>
 
-        <form action="/tasks" method="post" class="modal-content">
+        <form id="task-form" action="/tasks" method="post" class="modal-content">
             @csrf
+            <input type="hidden" name="task_id" id="task-id" value="">
+
             <div class="modal-body space-y-3">
                 <div>
                     <label class="block text-sm font-medium">Category</label>
@@ -57,7 +59,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-ghost">Cancel</button>
-                <button type="submit" class="btn btn-primary">Create Task</button>
+                <button type="submit" id="task-submit-btn" class="btn btn-primary">Create Task</button>
             </div>
         </form>
     </div>

@@ -1,7 +1,7 @@
 @php
     $categories = \App\Models\Category::all();
 @endphp
-<aside class="sidebar flex flex-col justify-between">
+<aside class="sidebar flex flex-col">
     <div class="flex flex-col">
         <div class="brand text-4xl font-bold text-primary">Todo App</div>
         <div class="card">
@@ -14,7 +14,7 @@
                         @endif
                             @foreach ($categories as $category )
                                 <button onclick="filterTasks('{{ $category->id }}', this)" class="px-3 py-2 text-dark bg-white shadow-sm text-left filter-btn rounded-sm">{{ $category->name }}</button>
-                            @endforeach
+                            @endforeach 
                     @endif
                 </div>
 
@@ -28,7 +28,21 @@
                 @enderror
         </div>
     </div>
-    <div class="flex gap-8 items-center">
-        <a href="/login" class="flex gap-1 btn btn-primary"><img src={{ asset('../images/Signin.svg') }} style="filter: brightness(0) saturate(100%) invert(100%) sepia(1%) saturate(321%) hue-rotate(339deg) brightness(115%) contrast(100%);"/>Login</a>
-    </div>
+    @auth
+        <div class="flex gap-2 mt-8 items-center">
+            @auth
+                <img src="{{ Auth::user()->profile }}" alt="user image" class="h-15 w-15 rounded-full">
+            @else
+                <img src="../../images/dummyprofile.jpg" alt="dummy profile image"/>
+            @endauth
+            <div class="flex flex-col gap-1">
+                <span class="text-lg font-medium text-secondary">{{ Auth::user()->name }}</span>
+                <a href="/profile" class="text-sm">view profile</a>
+            </div>
+        </div>
+    @else
+        <div class="flex gap-8 items-center mt-auto">
+            <a href="/login" class="flex gap-1 btn btn-primary"><img src={{ asset('../images/Signin.svg') }} style="filter: brightness(0) saturate(100%) invert(100%) sepia(1%) saturate(321%) hue-rotate(339deg) brightness(115%) contrast(100%);"/>Login</a>
+        </div>
+    @endauth
 </aside>

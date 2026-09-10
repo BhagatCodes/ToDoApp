@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\category;
+use App\Models\Category;
 
 class categoryController extends Controller
 {
@@ -18,7 +18,7 @@ class categoryController extends Controller
         ]);
         $category_title = $request->input('category-title');
         if($category_title)
-        $results = category::create([
+        $results = Category::create([
             'user_id'=>'1',
             'name'=>"$category_title",
         ]);
