@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->string('name');
+            $table->string('guest_id')->nullable();
             $table->timestamps();
         });
     }

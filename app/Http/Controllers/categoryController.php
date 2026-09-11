@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
 class categoryController extends Controller
 {
@@ -19,8 +20,9 @@ class categoryController extends Controller
         $category_title = $request->input('category-title');
         if($category_title)
         $results = Category::create([
-            'user_id'=>'1',
+            'user_id'=>auth()->id(),
             'name'=>"$category_title",
+            'session_id'=>session()->id(),
         ]);
         return redirect('/');
     }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,6 +51,12 @@ class authController extends Controller
             'email' => $validated['email'],
             'password' => $validated['password'],
         ], $request->boolean('remember'))) {
+            foreach([Task::class, Category::class] as $model){
+                $model::where('session_id',session()->id())->whereNull('user_id')->update([
+                    'user_id'=>auth()->id(),
+                    'session_id'=>null,
+                ]);
+            }
             $request->session()->regenerate();
             return redirect('/');
         }
@@ -56,5 +64,13 @@ class authController extends Controller
         return back()->withErrors([
             'email' => 'The email or password is incorrect.',
         ])->onlyInput('email');
+    }
+
+    public function logout(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }

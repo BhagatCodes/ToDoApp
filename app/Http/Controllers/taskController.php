@@ -21,6 +21,7 @@ class taskController extends Controller
             'task_description' => $request->task_description,
             'task_start' => $request->task_start,
             'working_hours' => $request->working_hours,
+            'session_id'=>session()->id(),
         ]);
         return redirect('/');
     }

@@ -29,12 +29,12 @@
         </div>
     </div>
     @auth
-        <div class="flex gap-2 mt-8 items-center">
-            @auth
-                <img src="{{ Auth::user()->profile }}" alt="user image" class="h-15 w-15 rounded-full">
+        <div class="flex gap-2 mt-8 items-center"> 
+            @if(isset(Auth::user()->profile))
+            <img src="{{ Auth::user()->profile }}" alt="user image" class="h-15 w-15 rounded-full">
             @else
-                <img src="../../images/dummyprofile.jpg" alt="dummy profile image"/>
-            @endauth
+            <img src="{{ asset('../images/dummyProfile.jpg') }}" alt="dummy image" class="h-15 w-15 rounded-full">
+            @endif
             <div class="flex flex-col gap-1">
                 <span class="text-lg font-medium text-secondary">{{ Auth::user()->name }}</span>
                 <a href="/profile" class="text-sm">view profile</a>

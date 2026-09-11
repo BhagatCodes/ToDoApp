@@ -20,6 +20,7 @@ Route::controller(authController::class)->group(function(){
     Route::get('/login','showLogin');
     Route::post('/register','registerUser')->name('user.register');
     Route::post('/login','loginUser')->name('user.login');
+    Route::post('/logout','logout')->name('user.logout');
 });
 Route::post('/addCategory',[categoryController::class, 'addCategory']);
 Route::post('/tasks',[taskController::class, 'addTask']);
